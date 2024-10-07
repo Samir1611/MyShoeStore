@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #edf3f8;
+}
+.parallelogram {
+  transform: skewX(-20deg);
+}
+/* Default background for smaller screens */
+.MainPage,
+#navver {
+  background: #edf3f8;
+  padding-left: clamp(1rem, 6vw, 7rem);
+  padding-right: clamp(1rem, 4vw, 7rem);
+  padding-top: clamp(0.8rem, 0.8vw, 1.5rem);
+}
+.Feature {
+  margin-left: clamp(1rem, 6vw, 7rem);
+  margin-right: clamp(1rem, 4vw, 7rem);
+  margin-top: clamp(1rem, 10vw, 10rem);
+  margin-bottom: clamp(1rem, 8vw, 10rem);
+}
+.Collection {
+  margin-left: clamp(1rem, 6vw, 7rem);
+  margin-right: clamp(1rem, 4vw, 7rem);
+  margin-top: clamp(1rem, 2vw, 4rem);
+  margin-bottom: clamp(2rem, 6vw, 10rem);
+}
+.MainPage {
+  padding-top: clamp(0.8rem, 0.8vw, 1.5rem);
+}
+#navver {
+  padding-bottom: clamp(0.8rem, 0.8vw, 1.5rem);
+}
+
+@media (min-width: 640px) {
+  /* Gradient background for larger screens */
+  .MainPage,
+  #navver {
+    background: linear-gradient(to right, #edf3f8 60%, #b3e5fc 40%);
+  }
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* Hide scrollbar for IE and Edge */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.custom-shape-divider-bottom-1728044560 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1728044560 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 10px;
+}
+
+.custom-shape-divider-bottom-1728044560 .shape-fill {
+  fill: #ffffff;
+}
+.custom-shape-divider-top-1728159301 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-top-1728159301 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 30px;
+}
+.custom-shape-divider-top-1728159301 .shape-fill {
+  fill: #edf3f8;
+}
+/* aall animations */
+
+@keyframes stickDrop {
+  from {
+    transform: translateX(90%) rotate(90deg); /* Stick off the right side, rotated */
+  }
+  to {
+    transform: translateX(0) rotate(0deg); /* Stick back to its original position, no rotation */
+  }
+}
+
+.firstanimation {
+  animation: stickDrop 2s normal;
+}
+@keyframes bounce {
+  0%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-20px);
+  }
+
+  40% {
+    transform: translateY(10px);
+  }
+}
+
+.bouncer {
+  animation: bounce 2s normal;
+}
+@keyframes rotateLine {
+  from {
+    transform: translateX(10px) rotate(91deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+.Ccenter {
+  animation: rotateLine 0.6s forwards;
+  transform-origin: right; /* Rotate from the left side */
+}
+
+@keyframes SizeAnimation {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+.SizeAnimation {
+  animation: SizeAnimation 1s forwards;
+}
+@keyframes AnimateCarousel {
+  0%,
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(800px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(-10px);
+  }
+}
+.AnimateCarousel {
+  animation: AnimateCarousel 1.2s 0.5s ease-in-out forwards,
+    fadeIn 0s 0.6s forwards; /* Start after 1s delay */
+  visibility: hidden; /* Hidden until animation starts */
+}
+@keyframes fadeIn {
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+  }
+}

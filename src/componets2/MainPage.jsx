@@ -6,7 +6,7 @@ const sneakers = [
     name: "Raebook Air",
     price: "Rs. 2300.00",
     colors: "3 COLORS",
-    image: "/I.png", // Add the image path or URL
+    image: "/images/I.png", // Add the image path or URL
   },
   {
     name: "Nike Air Span",

@@ -22,7 +22,10 @@ function App() {
         <Routes>
           <Route path="/MyShoeStore" element={<MainPage />}></Route>
 
-          <Route path="/men" element={<Men setLoading={setLoading} />} />
+          <Route
+            path="/MyShoeStore/men"
+            element={<Men setLoading={setLoading} />}
+          />
           {/* <Route path="/addtoCart" element={<AddtoCart />} /> */}
         </Routes>
       </Router>

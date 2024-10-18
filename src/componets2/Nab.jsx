@@ -33,20 +33,20 @@ const Nab = () => {
             <div className="hidden sm:block">
               <ul className="flex justify-center items-center sm:gap-[2vw] pr-16 cursor-default ">
                 <li>
-                  <Link to="/men">Men</Link>
+                  <Link to="/MyShoeStore/men">Men</Link>
                 </li>
                 <li>
-                  <Link to="/women" className="">
+                  <Link to="/MyShoeStore/women" className="">
                     Women
                   </Link>
                 </li>
                 <li>
-                  <Link to="/kids" className="">
+                  <Link to="/MyShoeStore/kids" className="">
                     Kids
                   </Link>
                 </li>
                 <li>
-                  <Link to="/trending" className="">
+                  <Link to="/MyShoeStore/trending" className="">
                     Trending
                   </Link>
                 </li>

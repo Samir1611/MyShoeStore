@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+
 const Spinner = () => {
   return (
     <div className="absolute inset-0 flex justify-center items-center h-screen bg-transparent">

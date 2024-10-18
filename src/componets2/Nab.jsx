@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, User, Menu } from "lucide-react";
-import "./index.css";
+
 const Nab = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const handleSvgClick = () => {

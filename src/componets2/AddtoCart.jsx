@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
 import Spinner from "./Spinner";
-import "./index.css";
+
 // Helper components
 const ImageGallery = ({ thumbnails, mainImage, setMainImage }) => {
   const handleError = (event, index) => {

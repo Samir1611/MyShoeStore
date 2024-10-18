@@ -2,7 +2,7 @@ import { ArrowDown, SlidersHorizontal } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
-import "./index.css";
+
 export const Men = ({ setLoading }) => {
   const [openSections, setOpenSections] = useState({
     gender: false,

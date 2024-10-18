@@ -3,13 +3,13 @@ import { SlidersHorizontal, Compass } from "lucide-react";
 import Footer from "./Footer";
 import Collection from "./Collection";
 import Feature from "./Feature";
-import "./index.css";
+
 const sneakers = [
   {
     name: "Raebook Air",
     price: "Rs. 2300.00",
     colors: "3 COLORS",
-    image: "I.png", // Add the image path or URL
+    image: "I.png",
   },
   {
     name: "Nike Air Span",
@@ -290,8 +290,8 @@ const MainPage = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-2 xl:mt-4 flex-grow flex flex-col sm:justify-around lg:justify-center">
-                    <h2 className=" sm:text-2xl lg:text-4xl sm:mb-2 lg:mb-6 font-bold">
+                  <div className="mt-2 xl:mt-6 flex-grow flex flex-col sm:justify-around lg:justify-center">
+                    <h2 className=" sm:text-2xl lg:text-3xl sm:mb-2 lg:mb-4 font-bold">
                       Nike Blazer Low
                     </h2>
                     <div className="my-6 h-[0.2px] 2xl:h-1 w-full bg-white/40"></div>

@@ -38,8 +38,8 @@ const Collection = () => {
   return (
     <>
       <div className="Collection">
-        <div className="font-semibold font-serif text-black/80 text-4xl md:text-5xl lg:text-6xl text-center">
-          Our Collection
+        <div className="px-4  sm:px-10 font-semibold font-serif text-black/80 text-xl md:text-3xl 2xl:text-6xl ">
+          Our Trending Products
         </div>
         <div className=" max-w-8xl  p-4  sm:p-10">
           <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-6 md:gap-12    ">

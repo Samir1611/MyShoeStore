@@ -7,6 +7,7 @@ const Footer = () => {
       <div
         className=" bg-black grid grid-cols-1 lg:grid-cols-10 text-white  text-normal w-full h-full"
         style={{
+          marginTop: "clamp(1rem, 5vw, 7rem)",
           paddingLeft: "clamp(1rem, 5vw, 7rem)",
           paddingRight: "clamp(1rem, 4vw, 7rem)",
           paddingTop: "clamp(0.8rem, 5vw, 10rem)",
@@ -56,7 +57,7 @@ const Footer = () => {
             <div className="flex items-center space-x-4 pb-6">
               <div className="Qrlogo h-28 w-28  ">
                 <img
-                  src="/QR.png"
+                  src="QR.png"
                   className="w-full h-full  object-contain"
                   alt=""
                 />

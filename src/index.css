@@ -15,8 +15,8 @@ body {
 .MainPage,
 #navver {
   background: #edf3f8;
-  padding-left: clamp(1rem, 6vw, 7rem);
-  padding-right: clamp(1rem, 4vw, 7rem);
+  padding-left: clamp(1rem, 5vw, 10rem);
+  padding-right: clamp(1rem, 3.3vw, 10rem);
   padding-top: clamp(0.8rem, 0.8vw, 1.5rem);
 }
 .Feature {
@@ -24,6 +24,12 @@ body {
   margin-right: clamp(1rem, 4vw, 7rem);
   margin-top: clamp(1rem, 10vw, 10rem);
   margin-bottom: clamp(1rem, 8vw, 10rem);
+}
+.Men {
+  margin-left: clamp(1rem, 5vw, 10rem);
+  margin-right: clamp(1rem, 3.3vw, 10rem);
+  margin-top: clamp(0.8rem, 2vw, 3rem);
+  padding-bottom: clamp(0.8rem, 5vw, 6rem);
 }
 .Collection {
   margin-left: clamp(1rem, 6vw, 7rem);
@@ -40,17 +46,18 @@ body {
 
 @media (min-width: 640px) {
   /* Gradient background for larger screens */
-  .MainPage,
-  #navver {
+  .MainPage {
     background: linear-gradient(to right, #edf3f8 60%, #b3e5fc 40%);
+  }
+  .addtoCart {
+    margin-left: clamp(1rem, 5vw, 10rem);
+    margin-right: clamp(1rem, 3.3vw, 10rem);
+    margin-top: clamp(0.8rem, 2vw, 3rem);
+    padding-bottom: clamp(10rem, 12vw, 16rem);
   }
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
-}
-
-/* Hide scrollbar for IE and Edge */
-.scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
@@ -177,4 +184,10 @@ body {
   to {
     visibility: visible;
   }
+}
+#navver {
+  position: fixed;
+  z-index: 50;
+  width: 100%;
+  top: 0;
 }

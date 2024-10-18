@@ -7,5 +7,5 @@ export default defineConfig({
   server: {
     host: true,
   },
-  base: "/MyShoeShop/Sam'sStore",
+  base: "/MyShoeStore/",
 });

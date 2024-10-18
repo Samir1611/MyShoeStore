@@ -1,3 +1,4 @@
+import React from "react";
 import "./index.css";
 
 import MainPage from "./componets2/MainPage";

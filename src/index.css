@@ -26,8 +26,8 @@ body {
   margin-bottom: clamp(1rem, 8vw, 10rem);
 }
 .Men {
-  margin-left: clamp(1rem, 5vw, 10rem);
-  margin-right: clamp(1rem, 3.3vw, 10rem);
+  margin-left: clamp(0.3rem, 5vw, 10rem);
+  margin-right: clamp(0.3rem, 3.3vw, 10rem);
   margin-top: clamp(0.8rem, 2vw, 3rem);
   padding-bottom: clamp(0.8rem, 5vw, 6rem);
 }
@@ -46,8 +46,9 @@ body {
 
 @media (min-width: 640px) {
   /* Gradient background for larger screens */
-  .MainPage {
-    background: linear-gradient(to right, #edf3f8 60%, #b3e5fc 40%);
+  .MainPage,
+  .Nabcol {
+    background: linear-gradient(to right, #edf3f8 60%, #b3e5fc 40%) !important;
   }
   .addtoCart {
     margin-left: clamp(1rem, 5vw, 10rem);
@@ -190,4 +191,20 @@ body {
   z-index: 50;
   width: 100%;
   top: 0;
+}
+/* Scrollbar styles */
+/* For WebKit browsers (Chrome, Safari, newer Edge) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px; /* Thin scrollbar width */
+  height: 4px; /* Thin scrollbar height */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-width: "3px"; /* Make scrollbar thinner */
+  scrollbar-color: #d5d4d4 #f1f1f1; /* Thumb and track colors */
 }

@@ -1,8 +1,9 @@
 import { ArrowDown, SlidersHorizontal } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 
-export const Men = ({ shoes }) => {
+export const Women = ({ shoes }) => {
   const [openSections, setOpenSections] = useState({
     gender: false,
     price: false,
@@ -38,25 +39,26 @@ export const Men = ({ shoes }) => {
       setHoveredShoeId(null);
     };
 
-    const handleMouseHover = (shoeId, colorImg, index) => {
-      setHoveredColorImg({
-        [shoeId]: colorImg,
-      });
+    const handleMouseHover = (shoeId, colorImg) => {
+      setHoveredColorImg((prev) => ({
+        ...prev,
+        [shoeId]: colorImg, // Update only the hovered shoe's color image
+      }));
     };
 
-    const menShoes = shoes.filter((shoe) => shoe.Catgory === "Men");
-    // console.log(menShoes);
+    const womenShoes = shoes.filter((shoe) => shoe.Catgory === "Women");
+    console.log(womenShoes);
     const handleShoeClick = (shoe) => {
-      // Navigate to AddtoCart and pass shoe information via state
       console.log(shoe.id);
+      // Navigate to AddtoCart and pass shoe information via state
       navigate("/MyShoeStore/addtoCart", {
         state: { selectedId: { id: shoe.id }, selectedImage: shoe },
       });
     };
     return (
-      <div className=" grid  grid-cols-2  lg:grid-cols-3 gap-2">
-        {menShoes.length > 0 &&
-          menShoes.map((shoe) => (
+      <div className=" grid  grid-cols-2   lg:grid-cols-3 gap-2">
+        {womenShoes.length > 0 &&
+          womenShoes.map((shoe) => (
             <div
               key={shoe.id}
               className="p-2"
@@ -93,32 +95,23 @@ export const Men = ({ shoes }) => {
                 </>
               )}
               {hoveredShoeId === shoe.id && (
-                <>
-                  <div
-                    className="flex  space-x-4"
-                    style={{ minHeight: "2rem" }}
-                  >
-                    {shoe.colorArray.map((colorImg, index) => (
-                      <div
-                        key={index}
-                        className="h-8 sm:h-16 w-[4rem] flex justify-center sm:justify-start gap-2 items-center  mb-2"
-                        style={{
-                          background:
-                            "linear-gradient(to top, #ACAEAA, #CCCCCC)",
-                        }}
-                        onMouseOver={() =>
-                          handleMouseHover(shoe.id, colorImg, index)
-                        }
-                      >
-                        {console.log(colorImg)}
-                        <img
-                          src={colorImg}
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </>
+                <div className="flex space-x-4" style={{ minHeight: "4rem" }}>
+                  {shoe.colorArray.map((colorImg, index) => (
+                    <div
+                      key={index}
+                      className="h-16 w-[4rem] flex justify-center sm:justify-start gap-2 items-center  mb-2"
+                      style={{
+                        background: "linear-gradient(to top, #ACAEAA, #CCCCCC)",
+                      }}
+                      onMouseOver={() => handleMouseHover(shoe.id, colorImg)}
+                    >
+                      <img
+                        src={colorImg}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
               )}
               <h1 className="text-lg font-bold pt-1">$ {shoe.price}</h1>
             </div>
@@ -130,7 +123,7 @@ export const Men = ({ shoes }) => {
   return (
     <>
       <div
-        className="fixed top-[3.75rem] 2xl:top-[5.6rem] z-40   bg-[#edf3f8]  hidden sm:flex justify-between items-center   "
+        className="fixed top-[3.75rem] 2xl:top-[5.6rem] z-40   bg-[#edf3f8] hidden sm:flex justify-between items-center  "
         style={{
           width: "calc(100% - 8%)",
           marginLeft: "clamp(1rem, 5vw, 10rem)",
@@ -138,7 +131,7 @@ export const Men = ({ shoes }) => {
           paddingBottom: "clamp(0.8rem, 0.8vw, 1.5rem)",
         }}
       >
-        <h1 className=" text-xl">Men's Trainers & Shoes</h1>
+        <h1 className=" text-xl">Women's Trainers & Shoes</h1>
         <div className=" flex space-x-8">
           <div className="flex space-x-2 " onClick={ToggleOptions}>
             <div className="cursor-pointer">
@@ -153,7 +146,7 @@ export const Men = ({ shoes }) => {
         </div>
       </div>
 
-      <div className="relative top-[4rem] 2xl:top-[6rem]  Men  flex flex-grow gap-4">
+      <div className="relative top-[4rem] 2xl:top-[6rem] Men  flex flex-grow gap-4">
         {Toggle && (
           <div
             className={`${
@@ -306,9 +299,9 @@ export const Men = ({ shoes }) => {
             <hr />
           </div>
         )}
-        <div className="flex-grow overflow-y-auto  sm:p-4 scrollbar-hide mb-8">
+        <div className="flex-grow overflow-y-auto sm:p-4 scrollbar-hide mb-8">
           <div className="grid-container">
-            <div className="block sm:hidden  ml-2">Men's Shoes</div>
+            <div className="block sm:hidden  ml-2">Women's Shoes</div>
             <ShoesGrid />
           </div>
         </div>

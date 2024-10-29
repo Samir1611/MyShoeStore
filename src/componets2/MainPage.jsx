@@ -1,36 +1,150 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { SlidersHorizontal, Compass } from "lucide-react";
-import Footer from "./Footer";
-import Collection from "./Collection";
-import Feature from "./Feature";
 
+import { useNavigate } from "react-router-dom";
 const sneakers = [
   {
-    name: "Raebook Air",
-    price: "Rs. 2300.00",
-    colors: "3 COLORS",
-    image: "I.png",
+    Name: "Nike Air Sabrina 2",
+    size: 36,
+    img: "I.png",
+    price: 2400,
+    color: 3,
+    Catgory: "Men",
+    colorArray: ["IC1.png", "IC2.png", "IC3.png"],
+    thumbnail: {
+      color1: [
+        "W1.png",
+        "W2.png",
+        "W3.png",
+        "W4.png",
+        "W5.png",
+        "W6.png",
+        "W7.png",
+      ],
+      color2: [
+        "W21.png",
+        "W22.png",
+        "W23.png",
+        "W24.png",
+        "W25.png",
+        "W26.png",
+        "W27.png",
+      ],
+      color3: [
+        "W31.png",
+        "W32.png",
+        "W33.png",
+        "W34.png",
+        "W35.png",
+        "W36.png",
+        "W37.png",
+      ],
+    },
+    id: "1",
   },
   {
-    name: "Nike Air Span",
-    price: "Rs. 3650.00",
-    colors: "3 COLORS",
-    image: "I2.png",
+    Name: "Adidas Ultraboost 24",
+    size: 40,
+    img: "I2.png",
+    price: 3300,
+    color: 4,
+    Catgory: "Trending",
+    colorArray: ["IC1.png", "IC2.png", "IC3.png", "IC4.png"],
+    thumbnail: {
+      color1: [
+        "W8.png",
+        "W9.png",
+        "W10.png",
+        "W11.png",
+        "W12.png",
+        "W13.png",
+        "W14.png",
+      ],
+      color2: [
+        "W15.png",
+        "W16.png",
+        "W17.png",
+        "W18.png",
+        "W19.png",
+        "W20.png",
+        "W21.png",
+      ],
+      color3: [
+        "W22.png",
+        "W23.png",
+        "W24.png",
+        "W25.png",
+        "W26.png",
+        "W27.png",
+        "W28.png",
+      ],
+      color4: [
+        "W29.png",
+        "W30.png",
+        "W31.png",
+        "W32.png",
+        "W33.png",
+        "W34.png",
+        "W35.png",
+      ],
+    },
+    id: "2",
   },
   {
-    name: "Nike Air Bndu",
-    price: "Rs. 2700.00",
-    colors: "4 COLORS",
-    image: "k.png",
+    Name: "Puma RS-X3",
+    size: 32,
+    img: "k.png",
+    price: 2100,
+    color: 2,
+    Catgory: "Women",
+    colorArray: ["IC1.png", "IC2.png"],
+    thumbnail: {
+      color1: [
+        "W36.png",
+        "W37.png",
+        "W38.png",
+        "W39.png",
+        "W40.png",
+        "W41.png",
+        "W42.png",
+      ],
+      color2: [
+        "W43.png",
+        "W44.png",
+        "W45.png",
+        "W46.png",
+        "W47.png",
+        "W48.png",
+        "W49.png",
+      ],
+    },
+    id: "3",
   },
   {
-    name: "Nike Air Band",
-    price: "Rs. 2300.00",
-    colors: "4 COLORS",
-    image: "I.png",
+    Name: "Reebok Nano X3",
+    size: 28,
+    img: "I5.png",
+    price: 3700,
+    color: 1,
+    Catgory: "Kids",
+    colorArray: ["IC1.png"],
+    thumbnail: {
+      color1: [
+        "W50.png",
+        "W51.png",
+        "W52.png",
+        "W53.png",
+        "W54.png",
+        "W55.png",
+        "W56.png",
+      ],
+    },
+    id: "4",
   },
 ];
 const MainPage = () => {
+  const navigate = useNavigate();
+  const [selectedShoe, setSelectedShoe] = useState(null);
   const [rotation, setRotation] = useState(0);
   const [selectedSize, setSelectedSize] = useState(41);
   const [selectedColor, setSelectedColor] = useState("#000000");
@@ -44,6 +158,11 @@ const MainPage = () => {
 
     return () => clearInterval(intervalId);
   }, []);
+  const handleShoeClick = (shoe) => {
+    navigate("/MyShoeStore/addtoCart", {
+      state: { selectedId: { id: shoe.id }, selectedImage: shoe },
+    });
+  };
   return (
     <>
       <div className="relative top-[3.75rem] MainPage bg-[#edf3f8] w-full ">
@@ -146,9 +265,9 @@ const MainPage = () => {
           {/* Left: Sneaker Carousel (60%) */}
           <div className="AnimateCarousel col-span-6 pt-6  w-full">
             <div className="flex gap-4 sm:gap-8 overflow-x-auto scrollbar-hide">
-              {sneakers.map((shoe, index) => (
+              {sneakers.map((shoe) => (
                 <div
-                  key={index}
+                  key={shoe.id}
                   className="bg-white rounded-lg  flex-none"
                   style={{ minWidth: "calc(26% )" }}
                 >
@@ -167,12 +286,15 @@ const MainPage = () => {
                       </svg>
                     </div>
                     <img
-                      src={shoe.image}
-                      alt={shoe.name}
+                      src={shoe.img}
+                      alt={shoe.Name}
                       className="object-contain w-32 h-32 xl:w-36 xl:h-36 2xl:h-60 2xl:w-60"
                     />
                     <div className="absolute bottom-[-16px] flex justify-center items-center z-10">
-                      <div className="w-14 h-14 rounded-full bg-white flex justify-center items-center">
+                      <div
+                        className="w-14 h-14 rounded-full bg-white flex justify-center items-center"
+                        onClick={() => handleShoeClick(shoe)}
+                      >
                         <div className="w-12 h-12 rounded-full bg-blue-300 flex justify-center items-center">
                           <span className="text-white text-xl cursor-default">
                             +
@@ -197,8 +319,8 @@ const MainPage = () => {
                     </div>
                   </div>
                   <div className="p-4 text-center">
-                    <h3 className="font-bold">{shoe.name}</h3>
-                    <p className="text-sm">{shoe.colors}</p>
+                    <h3 className="font-bold">{shoe.Name}</h3>
+                    <p className="text-sm">{shoe.color} colors</p>
                     <p className="font-bold">{shoe.price}</p>
                   </div>
                 </div>
@@ -306,9 +428,6 @@ const MainPage = () => {
           </div>
         </div>
       </div>
-      <Feature />
-      <Collection />
-      <Footer />
     </>
   );
 };

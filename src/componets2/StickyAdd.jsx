@@ -1,8 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Heart } from "lucide-react";
 import Spinner from "./Spinner";
 
+import { useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { addToCart } from "../redux/AddtoCart/CartSlice";
+import { useDispatch } from "react-redux";
+import MightLike from "./MightLike";
+import Footer from "./Footer";
 // Helper components
+const notifySuccess = () => toast.success(" Added to Cart Sucessfully.");
 const ImageGallery = ({ thumbnails, mainImage, setMainImage }) => {
   const handleError = (event, index) => {
     event.target.src = `W${index + 1}.png`;
@@ -25,25 +34,21 @@ const ImageGallery = ({ thumbnails, mainImage, setMainImage }) => {
     setMainImage(thumbnails[index]);
   };
   return (
-    <div
-      className=" flex gap-4 lg:gap-8   h-full justify-center
-      sticky top-[6rem] 
-      max-h-[calc(100vh-3rem)] 
-      "
-    >
-      <div className="hidden sm:block w-[10%]  lg:w-[8%]">
+    <div className=" flex gap-4 justify-end m-5 ">
+      <div className="hidden sm:block ">
         {thumbnails.map((src, index) => (
           <img
             key={index}
             src={src}
             alt={`W${index + 1}.png`}
-            className="mb-4 bg-white/50 h-16 w-16  cursor-pointer"
+            className="mb-4 bg-white/50 h-16 w-16  cursor-pointer "
             onMouseOver={() => handleThumbnailClick(index)}
             onError={(event) => handleError(event, index)}
           />
         ))}
       </div>
-      <div className="sm:w-4/5 xl:place-content-center relative">
+      <div className=" relative   ">
+        {" "}
         <button
           onClick={handlePrevImage}
           className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100"
@@ -53,7 +58,7 @@ const ImageGallery = ({ thumbnails, mainImage, setMainImage }) => {
         <img
           src={mainImage}
           onError={(event) => handleError(event, currentIndex)}
-          className="w-full bg-white/50  rounded-xl object-fit "
+          className="w-full h-full bg-white/50 rounded-xl object-contain"
         />
         <button
           onClick={handleNextImage}
@@ -77,16 +82,26 @@ const ProductInfo = ({
   setSelectedSize,
   selectedColor,
   setSelectedColor,
+  mainImage,
   setMainImage,
 }) => {
+  const dispatch = useDispatch();
+  const addedtoclick = () => {
+    const selectedShoe = {
+      id,
+      title,
+      price,
+      size: selectedSize,
+      description,
+      image: mainImage,
+    };
+    console.log(id);
+    console.log(selectedShoe);
+    // Dispatch the selected shoe to the Redux store
+    dispatch(addToCart(selectedShoe));
+  };
   return (
-    <div
-      className="md:w-1/3 border  p-4 mx-4 md:mx-0 rounded-lg shadow-md flex-grow overflow-auto h-full scrollbar-hide"
-      style={{
-        position: "sticky",
-        top: "6rem",
-      }}
-    >
+    <div className=" main  p-4 mx-4 md:mx-0 rounded-lg  flex-grow overflow-auto h-full scrollbar-hide ">
       <div className="mb-4">
         <h1 className="text-2xl font-bold">{title}</h1>
         <p className="text-gray-600">{description}</p>
@@ -131,9 +146,27 @@ const ProductInfo = ({
         </div>
       </div>
       <div>
-        <button className="w-full bg-black text-white py-3 rounded-3xl mb-2">
+        <button
+          onClick={() => {
+            addedtoclick(); // First, add the item to the cart
+            notifySuccess(); // Then, show the success toast
+          }}
+          className="w-full bg-black text-white py-3 rounded-3xl mb-2"
+        >
           Add to Bag
         </button>
+        <ToastContainer
+          style={{ marginTop: "8vh" }}
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <button className="w-full border border-gray-300 py-3 rounded-3xl flex items-center justify-center">
           <Heart className="mr-2" /> Favourite
         </button>
@@ -189,12 +222,18 @@ const ProductInfo = ({
   );
 };
 
-const AddtoCart = ({ setLoading }) => {
+const StickyAdd = ({ setLoading }) => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColorIndex, setSelectedColorIndex] = useState(0); // Default to the first color
   const [mainImage, setMainImage] = useState(""); // Main image state
   const [shoes, setShoes] = useState(null); // Store shoe data
-
+  const location = useLocation();
+  const selecedIdFromGrid = location.state?.selectedId?.id || shoes?.id;
+  const selectedImageFromGrid = location.state?.selectedImage.img;
+  const selectedNameFromGrid = location.state?.selectedImage.Name;
+  const selectedCategoryFromGrid = location.state?.selectedImage.Catgory;
+  const selectedprizeFromGrid = location.state?.selectedImage.price;
+  const selectedcolorFromGrid = location.state?.selectedImage.colorArray;
   useEffect(() => {
     const apiFetcher = async () => {
       try {
@@ -203,19 +242,20 @@ const AddtoCart = ({ setLoading }) => {
           "https://67064198a0e04071d22612fc.mockapi.io/api/shoe/men/Men"
         );
         const data = await response.json();
-        const firstShoe = data.find((shoe) => shoe.id === "1"); // Find the first object with ID 1
+        const firstShoe = data.find((shoe) => shoe.id === selecedIdFromGrid); // Find the first object with ID 1
         setShoes(firstShoe);
-        setMainImage(firstShoe.img); // Set the main image from the API
+        setMainImage(selectedImageFromGrid || firstShoe.img); // Set the main image from the API
         setSelectedSize(36);
-        console.log(shoes);
       } catch (err) {
         console.error("Error", err);
       } finally {
         setLoading(false); // Set loading to false after fetch is done
       }
     };
+
     apiFetcher();
-  }, [setLoading]);
+  }, [setLoading, selecedIdFromGrid, selectedImageFromGrid]);
+
   if (!shoes) {
     return <Spinner />;
   }
@@ -230,30 +270,39 @@ const AddtoCart = ({ setLoading }) => {
   const thumbnails = shoes.thumbnail[colorKeys[selectedColorIndex]] || [];
 
   return (
-    <div className="addtoCart relative top-[4rem] md:flex  max-w-6xl gap-4  justify-center  mx-auto pb-[16vh]">
-      <div className="w-full md:w-2/3 mb-4 sm:mb-16 ">
-        {/* Image Gallery Component */}
-        <ImageGallery
-          thumbnails={thumbnails} // Pass color images as thumbnails
-          mainImage={mainImage} // Pass current main image state
-          setMainImage={setMainImage} // Pass function to update the main image
-        />
+    <>
+      <div className="relative top-[6vh]  md:top-[4vh] sticky-section w-[100vw]  md:flex  md:p-[40px] box-border  justify-center">
+        <div className="sticky-box md:w-[90%] lg:w-[70%] xl:w-[40%] 2xl:w-[30%] md:h-[500px] flex items-start xl:justify-end justify-center md:sticky md:top-[9vh] md:mb-16">
+          {/* settop and sticky and mb and main is height for sticky */}
+          <ImageGallery
+            thumbnails={thumbnails} // Pass color images as thumbnails
+            mainImage={mainImage} // Pass current main image state
+            setMainImage={setMainImage} // Pass function to update the main image
+          />
+        </div>
+
+        {/* Product Info Component */}
+        <div className="md:w-[40%] lg:w-[28%]">
+          <ProductInfo
+            id={selecedIdFromGrid}
+            title={selectedNameFromGrid || shoes.Name} // Display name from API
+            description={`${selectedCategoryFromGrid}'s Shoe`}
+            price={selectedprizeFromGrid || shoes.price} // Display price from API
+            sizes={sizes} // Use the original sizes list
+            colors={selectedcolorFromGrid || colors} // Use colors from API
+            selectedSize={selectedSize}
+            setSelectedSize={setSelectedSize}
+            selectedColor={selectedColorIndex} // Pass the selected color index
+            setSelectedColor={setSelectedColorIndex} // Update function
+            mainImage={mainImage}
+            setMainImage={setMainImage} // Pass setMainImage to ProductInfo
+          />
+        </div>
       </div>
-      {/* Product Info Component */}
-      <ProductInfo
-        title={shoes.Name} // Display name from API
-        description="Men's Shoe"
-        price={shoes.price} // Display price from API
-        sizes={sizes} // Use the original sizes list
-        colors={colors} // Use colors from API
-        selectedSize={selectedSize}
-        setSelectedSize={setSelectedSize}
-        selectedColor={selectedColorIndex} // Pass the selected color index
-        setSelectedColor={setSelectedColorIndex} // Update function
-        setMainImage={setMainImage} // Pass setMainImage to ProductInfo
-      />
-    </div>
+      <MightLike />
+      <Footer />
+    </>
   );
 };
 
-export default AddtoCart;
+export default StickyAdd;

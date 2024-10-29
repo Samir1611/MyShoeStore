@@ -1,17 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, User, Menu } from "lucide-react";
-
-const Nab = () => {
+import { selectCartItemCount } from "../redux/AddtoCart/CartSlice";
+import { useSelector } from "react-redux";
+const Nab = ({ className }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null); // Ref for the dropdown
+  const menuButtonRef = useRef(null); // Ref for the menu button
+
   const handleSvgClick = () => {
     setIsDropdownOpen(!isDropdownOpen); // Toggle the dropdown
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if the click is outside the dropdown and not on the menu button
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !menuButtonRef.current.contains(event.target) // Ignore clicks on the menu button
+      ) {
+        setIsDropdownOpen(false); // Close the dropdown
+      }
+    };
 
+    // Attach event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  // Function to close dropdown when clicking a nav link
+  const handleNavItemClick = () => {
+    setIsDropdownOpen(false);
+  };
+  const cartItemCount = useSelector(selectCartItemCount);
+  console.log(cartItemCount);
   return (
     <>
       <nav
         id="navver"
+        className={className}
         // style={{
         //   background: "linear-gradient(to right, #edf3f8 60%, #b3e5fc 40%)",
         // }}
@@ -29,9 +59,9 @@ const Nab = () => {
           </div>
 
           {/* Middle column (7/12): Links centered */}
-          <div className="nav-links col-span-3 sm:col-span-7 flex justify-center">
+          <div className="nav-links col-span-3 sm:col-span-8 flex justify-center">
             <div className="hidden sm:block">
-              <ul className="flex justify-center items-center sm:gap-[2vw] pr-16 cursor-default ">
+              <ul className="flex justify-center items-center sm:gap-[2vw] pr-16 cursor-pointer   ">
                 <li>
                   <Link to="/MyShoeStore/men">Men</Link>
                 </li>
@@ -55,12 +85,23 @@ const Nab = () => {
           </div>
 
           {/* Last column (3/12): Icons */}
-          <div className="col-span-7 sm:col-span-3  flex justify-end items-center sm:gap-[2vw]">
-            <ShoppingCart />
+          <div className="col-span-7 sm:col-span-2  flex justify-end items-center sm:gap-[2vw]">
+            <Link to="/MyShoeStore/Bag" className="relative">
+              <ShoppingCart />
+              {cartItemCount > 0 && (
+                <span className="absolute top-[-3px] right-[-9px] bg-red-500 text-white rounded-full text-xs w-4 h-4 flex items-center justify-center">
+                  {cartItemCount}
+                </span>
+              )}
+            </Link>
             <div className="ml-4">
               <User />
             </div>
-            <div className="sm:hidden ml-4" onClick={handleSvgClick}>
+            <div
+              className="sm:hidden ml-4"
+              ref={menuButtonRef}
+              onClick={handleSvgClick}
+            >
               <Menu />
             </div>
           </div>
@@ -68,12 +109,33 @@ const Nab = () => {
 
         {/* Mobile Dropdown */}
         {isDropdownOpen && (
-          <div className="sm:hidden bg-[#edf3f8] pl-1 mt-2">
-            <ul className="flex flex-col items-start">
-              <li className="py-2">Men</li>
-              <li className="py-2">Women</li>
-              <li className="py-2">Kids</li>
-              <li className="py-2">Trending</li>
+          <div className="sm:hidden bg-[#edf3f8] pl-1 mt-2" ref={dropdownRef}>
+            <ul className="flex flex-col items-start ">
+              <li className="py-2">
+                <Link to="/MyShoeStore/men" onClick={handleNavItemClick}>
+                  Men
+                </Link>
+              </li>
+              <li className="py-2">
+                <Link to="/MyShoeStore/women" onClick={handleNavItemClick}>
+                  Women
+                </Link>
+              </li>
+              <li className="py-2">
+                <Link to="/MyShoeStore/kids" onClick={handleNavItemClick}>
+                  Kids
+                </Link>
+              </li>
+              <li className="py-2">
+                {" "}
+                <Link
+                  to="/MyShoeStore/trending"
+                  onClick={handleNavItemClick}
+                  className=""
+                >
+                  Trending
+                </Link>
+              </li>
             </ul>
           </div>
         )}

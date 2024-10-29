@@ -123,7 +123,7 @@ export const Kids = ({ shoes }) => {
   return (
     <>
       <div
-        className="fixed top-[3.75rem] 2xl:top-[5.6rem] z-40   bg-[#edf3f8] hidden sm:flex justify-between items-center  "
+        className="fixed top-[3.75rem] z-40   bg-[#edf3f8] hidden sm:flex justify-between items-center  "
         style={{
           width: "calc(100% - 8%)",
           marginLeft: "clamp(1rem, 5vw, 10rem)",
@@ -146,7 +146,7 @@ export const Kids = ({ shoes }) => {
         </div>
       </div>
 
-      <div className="relative top-[4rem] 2xl:top-[6rem]  Men  flex flex-grow gap-4">
+      <div className="relative top-[4rem]  Men  flex flex-grow gap-4">
         {Toggle && (
           <div
             className={`${
@@ -306,7 +306,6 @@ export const Kids = ({ shoes }) => {
           </div>
         </div>
       </div>
-      <MightLike />
     </>
   );
 };

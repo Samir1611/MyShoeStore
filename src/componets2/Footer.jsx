@@ -24,7 +24,7 @@ const Footer = () => {
             <div className="col-span-3  ">
               <div className="flex flex-col space-y-4">
                 <p>Support</p>
-                <p>Gwarkok, Lalitpur,Nepal</p>
+                <p>Gwarko, Lalitpur,Nepal</p>
                 <p className=" break-words">johnshakya16@gmail.com</p>
                 <p>++977 9768445916</p>
               </div>

@@ -43,10 +43,6 @@ function App() {
   }, []);
   return (
     <>
-      {/* <Navbar /> */}
-      {/* <Timer /> */}
-      {/* <Landingpage /> */}
-
       <Router>
         <NabWrapper />
         {loading && <Spinner />}
@@ -112,7 +108,6 @@ function App() {
             }
           />
         </Routes>
-        {/* {!loading && <Footer />} */}
       </Router>
     </>
   );
@@ -124,16 +119,5 @@ const NabWrapper = () => {
   const location = useLocation();
   const isMainPage = location.pathname === "/MyShoeStore/";
 
-  return (
-    <Nab
-      className={isMainPage ? "Nabcol" : ""}
-      // style={
-      //   isMainPage
-      //     ? {
-      //         background: "linear-gradient(to right, #edf3f8 60%, #b3e5fc 40%)",
-      //       }
-      //     : {}
-      // }
-    />
-  );
+  return <Nab className={isMainPage ? "Nabcol" : ""} />;
 };

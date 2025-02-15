@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
 
-import MainPage from "./componets2/MainPage";
-import Nab from "./componets2/Nab";
-import { Men } from "./componets2/Men";
+import MainPage from "./components2/MainPage";
+import Nab from "./components2/Nab";
+import { Men } from "./components2/Men";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
 } from "react-router-dom";
-import Spinner from "./componets2/Spinner";
-import StickyAdd from "./componets2/StickyAdd";
-import { Women } from "./componets2/Women";
-import { Kids } from "./componets2/Kids";
-import { Trending } from "./componets2/Trending";
-import AddtoBag from "./componets2/AddtoBag";
-import Footer from "./componets2/Footer";
-import Feature from "./componets2/Feature";
-import Collection from "./componets2/Collection";
+import Spinner from "./components2/Spinner";
+import StickyAdd from "./components2/StickyAdd";
+import { Women } from "./components2/Women";
+import { Kids } from "./components2/Kids";
+import { Trending } from "./components2/Trending";
+import AddtoBag from "./components2/AddtoBag";
+import Footer from "./components2/Footer";
+import Feature from "./components2/Feature";
+import Collection from "./components2/Collection";
 
 function App() {
   const [loading, setLoading] = useState(true);

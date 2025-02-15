@@ -57,7 +57,7 @@ const Footer = () => {
             <div className="flex items-center space-x-4 pb-6">
               <div className="Qrlogo h-28 w-28  ">
                 <img
-                  src="QR.png"
+                  src="/QR.png"
                   className="w-full h-full  object-contain"
                   alt=""
                 />

@@ -16,7 +16,11 @@ const Bag = () => {
       {cartItems.map((item, index) => (
         <div key={index} className="h-full">
           <div className="flex items-center mb-4 py-4 border-b  border-gray-300">
-            <img src={item.image} alt={item.image} className="w-24 h-24" />
+            <img
+              src={`/${item.image}`}
+              alt={item.image}
+              className="w-24 h-24"
+            />
             <div className="ml-4">
               <div className="flex space-x-5 items-center">
                 <h2 className="text-lg font-semibold">{item.title}</h2>

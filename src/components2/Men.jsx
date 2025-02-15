@@ -49,7 +49,7 @@ export const Men = ({ shoes }) => {
     const handleShoeClick = (shoe) => {
       // Navigate to AddtoCart and pass shoe information via state
       console.log(shoe.id);
-      navigate("/MyShoeStore/addtoCart", {
+      navigate("/addtoCart", {
         state: { selectedId: { id: shoe.id }, selectedImage: shoe },
       });
     };
@@ -75,8 +75,8 @@ export const Men = ({ shoes }) => {
                 <img
                   src={
                     hoveredShoeId === shoe.id && hoveredColorImg[shoe.id]
-                      ? hoveredColorImg[shoe.id]
-                      : shoe.img
+                      ? `/${hoveredColorImg[shoe.id]}`
+                      : `/${shoe.img}`
                   }
                   className="h-full w-full object-contain overflow-clip "
                 />
@@ -112,7 +112,7 @@ export const Men = ({ shoes }) => {
                       >
                         {console.log(colorImg)}
                         <img
-                          src={colorImg}
+                          src={`/${colorImg}`}
                           className="w-full h-full object-contain"
                         />
                       </div>

@@ -39,7 +39,7 @@ const ImageGallery = ({ thumbnails, mainImage, setMainImage }) => {
         {thumbnails.map((src, index) => (
           <img
             key={index}
-            src={src}
+            src={`/${src}`}
             alt={`W${index + 1}.png`}
             className="mb-4 bg-white/50 h-16 w-16  cursor-pointer "
             onMouseOver={() => handleThumbnailClick(index)}
@@ -56,7 +56,7 @@ const ImageGallery = ({ thumbnails, mainImage, setMainImage }) => {
           &#10094;
         </button>
         <img
-          src={mainImage}
+          src={`/${mainImage}`}
           onError={(event) => handleError(event, currentIndex)}
           className="w-full h-full bg-white/50 rounded-xl object-contain"
         />
@@ -112,7 +112,7 @@ const ProductInfo = ({
           {colors.map((color, index) => (
             <img
               key={index}
-              src={color}
+              src={`/${color}`}
               onClick={() => {
                 setSelectedColor(index); // Set the selected color
                 setMainImage(color); // Update the main image based on selected color

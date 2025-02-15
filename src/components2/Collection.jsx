@@ -28,7 +28,7 @@ const Collection = ({ setLoading }) => {
   );
   console.log(trendingShoes);
   const handleShoeClick = (shoe) => {
-    navigate("/MyShoeStore/addtoCart", {
+    navigate("/addtoCart", {
       state: { selectedId: { id: shoe.id }, selectedImage: shoe },
     });
   };
@@ -48,7 +48,7 @@ const Collection = ({ setLoading }) => {
               >
                 <div className="mx-auto h-28 w-30  sm:h-32 sm:w-32 md:h-40 md:w-40 lg:h-48 lg:w-48 ">
                   <img
-                    src={shoe.img}
+                    src={`/${shoe.img}`}
                     alt={shoe.Name}
                     className="object-contain w-full  h-full"
                   />
@@ -62,7 +62,7 @@ const Collection = ({ setLoading }) => {
           </div>
         </div>
         <div className="flex  items-center justify-center text-2xl text-black">
-          <Link to="/MyShoeStore/trending" className="flex items-center ">
+          <Link to="/trending" className="flex items-center ">
             {" "}
             <div>See all</div>
             <div>

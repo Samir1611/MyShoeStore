@@ -51,7 +51,7 @@ export const Women = ({ shoes }) => {
     const handleShoeClick = (shoe) => {
       console.log(shoe.id);
       // Navigate to AddtoCart and pass shoe information via state
-      navigate("/MyShoeStore/addtoCart", {
+      navigate("/addtoCart", {
         state: { selectedId: { id: shoe.id }, selectedImage: shoe },
       });
     };
@@ -77,10 +77,10 @@ export const Women = ({ shoes }) => {
                 <img
                   src={
                     hoveredShoeId === shoe.id && hoveredColorImg[shoe.id]
-                      ? hoveredColorImg[shoe.id]
-                      : shoe.img
+                      ? `/${hoveredColorImg[shoe.id]}`
+                      : `/${shoe.img}`
                   }
-                  className="h-full w-full object-contain overflow-clip "
+                  className="h-full w-full object-contain overflow-clip"
                 />
               </div>
               {hoveredShoeId !== shoe.id && (
@@ -106,7 +106,7 @@ export const Women = ({ shoes }) => {
                       onMouseOver={() => handleMouseHover(shoe.id, colorImg)}
                     >
                       <img
-                        src={colorImg}
+                        src={`/${colorImg}`}
                         className="w-full h-full object-contain"
                       />
                     </div>

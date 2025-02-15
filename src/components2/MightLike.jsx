@@ -185,7 +185,7 @@ const sneakers = [
 const MightLike = () => {
   const navigate = useNavigate();
   const handleShoeClick = (shoe) => {
-    navigate("/MyShoeStore/addtoCart", {
+    navigate("/addtoCart", {
       state: { selectedId: { id: shoe.id }, selectedImage: shoe },
     });
   };
@@ -210,7 +210,7 @@ const MightLike = () => {
             >
               <div className="relative flex justify-center items-end w-full bg-gray-200 rounded-t-lg">
                 <img
-                  src={shoe.img}
+                  src={`/${shoe.img}`}
                   alt={shoe.Name}
                   className="object-contain w-[70vw] h-[40vh] md:w-[60vw]   md:h-[50vh] lg:h-[60vh]  xl:w-[28vw] xl:h-[60vh] 2xl:h-[70vh] 2xl:w-[32vw]"
                 />

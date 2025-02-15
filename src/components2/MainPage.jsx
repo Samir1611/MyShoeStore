@@ -159,7 +159,7 @@ const MainPage = () => {
     return () => clearInterval(intervalId);
   }, []);
   const handleShoeClick = (shoe) => {
-    navigate("/MyShoeStore/addtoCart", {
+    navigate("/addtoCart", {
       state: { selectedId: { id: shoe.id }, selectedImage: shoe },
     });
   };
@@ -236,7 +236,7 @@ const MainPage = () => {
           <div className="hidden sm:flex  sm:col-span-4  justify-center items-center p-1 ">
             <div className="ml-4 relative w-full h-auto">
               <img
-                src="III.png"
+                src="/III.png"
                 alt="New Jordan 6 Rings"
                 className="w-full h-auto object-contain"
               />
@@ -286,7 +286,7 @@ const MainPage = () => {
                       </svg>
                     </div>
                     <img
-                      src={shoe.img}
+                      src={`/${shoe.img}`}
                       alt={shoe.Name}
                       className="object-contain w-32 h-32 xl:w-36 xl:h-36 2xl:h-60 2xl:w-60"
                     />
@@ -331,7 +331,7 @@ const MainPage = () => {
           <div className="flex flex-col gap-y-12">
             <div className="block  sm:hidden relative w-full h-auto">
               <img
-                src="III.png"
+                src="/III.png"
                 alt="New Jordan 6 Rings"
                 className="w-full h-auto object-contain"
               />

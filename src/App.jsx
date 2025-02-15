@@ -48,7 +48,7 @@ function App() {
         {loading && <Spinner />}
         <Routes>
           <Route
-            path="/MyShoeStore"
+            path="/"
             element={
               <>
                 <MainPage />
@@ -60,7 +60,7 @@ function App() {
           ></Route>
 
           <Route
-            path="/MyShoeStore/men"
+            path="/men"
             element={
               <>
                 <Men shoes={shoes} /> {!loading && <Footer />}
@@ -68,7 +68,7 @@ function App() {
             }
           />
           <Route
-            path="/MyShoeStore/women"
+            path="/women"
             element={
               <>
                 <Women shoes={shoes} />
@@ -77,7 +77,7 @@ function App() {
             }
           />
           <Route
-            path="/MyShoeStore/kids"
+            path="/kids"
             element={
               <>
                 <Kids shoes={shoes} /> {!loading && <Footer />}
@@ -85,7 +85,7 @@ function App() {
             }
           />
           <Route
-            path="/MyShoeStore/trending"
+            path="/trending"
             element={
               <>
                 <Trending shoes={shoes} />
@@ -95,11 +95,11 @@ function App() {
           />
 
           <Route
-            path="/MyShoeStore/addtoCart"
+            path="/addtoCart"
             element={<StickyAdd setLoading={setLoading} />}
           />
           <Route
-            path="/MyShoeStore/Bag"
+            path="/Bag"
             element={
               <>
                 <AddtoBag setLoading={setLoading} />
@@ -117,7 +117,7 @@ export default App;
 
 const NabWrapper = () => {
   const location = useLocation();
-  const isMainPage = location.pathname === "/MyShoeStore/";
+  const isMainPage = location.pathname === "/";
 
   return <Nab className={isMainPage ? "Nabcol" : ""} />;
 };

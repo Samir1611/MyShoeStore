@@ -10,4 +10,12 @@ export default defineConfig({
     host: true,
   },
   base: "/MyShoeStore/",
+  build: {
+    rollupOptions: {
+      external: [
+        "/MyShoeStore/assets/index-B6NKKOq8.js",
+        "/MyShoeStore/assets/index-C-SyxxqC.css",
+      ],
+    },
+  },
 });
